@@ -33,6 +33,10 @@ public class Window {
 
         init();
         loop();
+
+        //Free the memory
+        glfwTerminate();
+        glfwSetErrorCallback(null).free();
     }
 
     public void init(){
