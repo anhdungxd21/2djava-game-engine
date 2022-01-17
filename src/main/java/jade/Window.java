@@ -3,6 +3,7 @@ package jade;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
+import util.Time;
 
 import static java.lang.invoke.MethodHandles.loop;
 import static org.lwjgl.glfw.GLFW.*;
@@ -10,11 +11,14 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Window {
+
     private int width, height;
     private String title;
     private long glfwWindow;
     private static Window window;
-    private long r, g, b, a;
+    public long r, g, b, a;
+
+    private static Scene currentScene = null;
 
     private Window(){
         this.width = 1920;
@@ -24,6 +28,21 @@ public class Window {
         this.g = 1;
         this.b = 1;
         this.a = 1;
+    }
+
+    public static void changeScene(int newScene){
+        switch (newScene){
+            case 0:
+                currentScene = new LevelEditorScene();
+                //CurrentScene.init()
+                break;
+            case 1:
+                currentScene = new LevelScene();
+                break;
+            default:
+                assert false: "Unknown scene '" + newScene + "'";
+                break;
+        }
     }
 
     public static Window get(){
@@ -84,9 +103,13 @@ public class Window {
         //creates the GLCapabilities instance and makes the OpenGL
         //bindings available for use.
         GL.createCapabilities();
+        Window.changeScene(0);
     }
 
     public void loop(){
+        float beginTime = Time.getTime();
+        float endTime;
+        float dt = -1.0f;
         while(!glfwWindowShouldClose(glfwWindow)){
             //Poll event
             glfwPollEvents();
@@ -98,7 +121,14 @@ public class Window {
                 System.out.println("Space key is pressed");
             }
 
+            if (dt >= 0) {
+                currentScene.update(dt);
+            }
+
             glfwSwapBuffers(glfwWindow);
+            endTime = Time.getTime();
+            dt = endTime - beginTime;
+            beginTime = endTime;
         }
     }
 }
