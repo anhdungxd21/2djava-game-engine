@@ -4,12 +4,12 @@ jade/MouseListener.java
  jade.MouseListener
 util/Time.java
  util.Time
-jade/Scene.java
- jade.Scene
 jade/LevelScene.java
  jade.LevelScene
 Main.java
  Main
+jade/Scene.java
+ jade.Scene
 jade/Window.java
  jade.Window
 jade/LevelEditorScene.java
