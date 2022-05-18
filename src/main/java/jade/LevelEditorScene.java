@@ -43,7 +43,10 @@ public class LevelEditorScene extends Scene{
 
     @Override
     public void init() {
+<<<<<<< HEAD
         this.camera = new Camera(new Vector2f());
+=======
+>>>>>>> a11090fee263e17e841d7ecea4bed5c5adebe72b
         defaultShader = new Shader("assets/shaders/default.glsl");
         defaultShader.compile();
 
@@ -84,10 +87,14 @@ public class LevelEditorScene extends Scene{
 
     @Override
     public void update(float dt) {
+<<<<<<< HEAD
         this.camera.position.x -= dt * 50.0f;
         defaultShader.use();
         defaultShader.uploadMat4f("uProjection", camera.getProjectionMatrix());
         defaultShader.uploadMat4f("uView", camera.getViewMatrix());
+=======
+        defaultShader.use();
+>>>>>>> a11090fee263e17e841d7ecea4bed5c5adebe72b
         // Bind the VAO that we're using
         glBindVertexArray(vaoID);
 

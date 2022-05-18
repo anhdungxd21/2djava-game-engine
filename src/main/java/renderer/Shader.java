@@ -122,5 +122,4 @@ public class Shader {
         mat4.get(matBuffer);
         glUniformMatrix4fv(varLocation, false, matBuffer);
     }
-
 }
